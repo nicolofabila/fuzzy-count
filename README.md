@@ -56,10 +56,3 @@ standardising, so salts and capitals don't matter. With a list loaded, each stan
 name and saved count shows **Approved for** chips tagged by regulator (a
 combination shows each ingredient's), and both downloads gain an `approved_for`
 column. Drugs missing from the list show "not in list".
-
-## Know the limits
-
-- **Patients can be counted twice.** If your file already holds totals per spelling,
-  adding spellings together counts a patient recorded under two spellings twice.
-  Treat those totals as upper bounds; a true unique count needs patient-level data.
-- **Files are never added together,** because two files can describe the same records.
