@@ -1,0 +1,126 @@
+:root {
+  color-scheme: light;
+  --bg: #fcfcfb;
+  --soft: #f2f1ee;
+  --border: #dddcd6;
+  --text: #0b0b0b;
+  --muted: #6b6a64;
+  --accent: #2a78d6;
+  --on-accent: #ffffff;
+  --typo: #fdf3dc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #1a1a19;
+    --soft: #252523;
+    --border: #383835;
+    --text: #f0efec;
+    --muted: #a3a29a;
+    --accent: #3987e5;
+    --typo: #3a3018;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.app { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; min-height: 100vh; }
+.block { margin-top: 28px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+button {
+  font: inherit; color: var(--text); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+button.x { border: none; background: none; padding: 0 4px; color: var(--muted); font-size: 16px; line-height: 1; }
+button.link { border: none; background: none; padding: 0 4px; color: var(--accent); }
+
+.files { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; background: var(--soft); border-radius: 999px; padding: 3px 6px 3px 12px; font-size: 13px; }
+
+.searchrow { display: flex; align-items: center; gap: 16px; }
+/* The search box sits over a copy of its text plus the grey autofill */
+.termbox { position: relative; flex: 1; background: var(--bg); border-radius: 8px; }
+input.term, .ghost {
+  font: inherit; font-size: 17px; letter-spacing: normal;
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;
+}
+input.term { position: relative; width: 100%; color: var(--text); background: transparent; }
+.ghost {
+  position: absolute; inset: 0; border-color: transparent; color: var(--muted);
+  white-space: pre; overflow: hidden; pointer-events: none;
+}
+.ghost .typed { color: transparent; }
+.tabhint {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 12px; color: var(--muted); background: var(--soft);
+  border-radius: 6px; padding: 2px 8px; pointer-events: none; white-space: nowrap;
+}
+kbd {
+  font: inherit; font-size: 11px; border: 1px solid var(--border); border-bottom-width: 2px;
+  border-radius: 4px; padding: 0 4px; margin-right: 2px; background: var(--bg); color: var(--text);
+}
+input.term:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+.searchrow label { display: flex; flex-direction: column; align-items: flex-start; white-space: nowrap; }
+.searchrow input[type="range"] { width: 110px; }
+
+.hitbar { display: flex; justify-content: flex-end; margin: 14px 0 6px; }
+ul.hits { list-style: none; margin: 0; padding: 0; max-height: 380px; overflow: auto; border-top: 1px solid var(--border); }
+ul.hits li { border-bottom: 1px solid var(--soft); }
+ul.hits label { display: flex; align-items: center; gap: 10px; padding: 6px 2px; cursor: pointer; }
+ul.hits label:hover { background: var(--soft); }
+.hitlabel { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.badge { font-size: 11px; background: var(--typo); border-radius: 999px; padding: 0 7px; white-space: nowrap; }
+
+.total {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 12px; padding: 10px 12px; background: var(--soft); border-radius: 8px;
+}
+.total .line { display: block; }
+.total strong { font-size: 17px; font-variant-numeric: tabular-nums; }
+
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: 7px 8px; border-bottom: 1px solid var(--soft); text-align: left; }
+th { font-size: 13px; font-weight: 600; color: var(--muted); border-bottom-color: var(--border); }
+th.num { text-align: right; }
+.foot { display: flex; justify-content: flex-end; margin-top: 10px; }
+
+.bars { margin-top: 24px; display: grid; gap: 6px; }
+.barpick { display: flex; gap: 6px; margin-bottom: 6px; }
+.barpick button { padding: 3px 10px; font-size: 13px; }
+.barpick button.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.bar { display: grid; grid-template-columns: minmax(80px, 180px) 1fr 80px; align-items: center; gap: 10px; }
+.barname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.bartrack { height: 16px; }
+.barfill { display: block; height: 100%; min-width: 2px; background: var(--accent); border-radius: 0 4px 4px 0; }
+
+/* Tabs, drug list, standard names */
+.spacer { flex: 1; }
+.chip.list { background: var(--typo); }
+.error { color: #d03b3b; }
+.tabs { display: flex; gap: 4px; margin-top: 24px; border-bottom: 1px solid var(--border); }
+.tabs button { border: none; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 8px 12px; color: var(--muted); }
+.tabs button.on { color: var(--text); border-bottom-color: var(--accent); }
+.searchrow select { font: inherit; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+.hitbar { align-items: center; gap: 12px; }
+.hitbar .muted { margin-right: auto; }
+.groups { display: grid; gap: 14px; }
+.grouphead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 2px; }
+.grouphead .link { margin-left: auto; }
+.suggest { font-weight: 600; }
+.inds { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.ind { font-size: 12px; background: var(--soft); border-radius: 6px; padding: 1px 6px; }
+.reg { font-size: 10px; font-weight: 600; margin-left: 4px; color: var(--accent); }
+
+@media (max-width: 560px) {
+  .searchrow { flex-direction: column; align-items: stretch; }
+}
